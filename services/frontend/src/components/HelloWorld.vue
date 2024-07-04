@@ -1,15 +1,20 @@
 <script setup>
+import { useFetch } from '@vueuse/core';
+
 defineProps({
   msg: {
     type: String,
     required: true
   }
 })
+
+const { isFetching, error, data } = useFetch("http://localhost:8000/").json()
+
 </script>
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
+    <h1 class="green">{{ msg + data}}</h1>
     <h3>
       You’ve successfully created a project with
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
