@@ -5,3 +5,4 @@ services/backend/src/__pycache__/
 **/local_db/
 
 
+services/backend/src/database/logfile
