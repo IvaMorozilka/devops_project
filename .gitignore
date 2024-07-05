@@ -1,2 +1,7 @@
 .vscode/*
 services/backend/src/__pycache__/
+.env
+**/__pycache__/
+**/local_db/
+
+
