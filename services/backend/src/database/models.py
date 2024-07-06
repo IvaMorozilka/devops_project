@@ -9,10 +9,10 @@ class Users(models.Model):
     created_at = fields.DatetimeField(auto_now_add=True)
     modified_at = fields.DatetimeField(auto_now=True)
 
-class Todo(models.Model):
+class Todos(models.Model):
     id = fields.IntField(pk=True)
     content = fields.TextField()
-    author = fields.ForeignKeyField("models.Users", related_name="note")
+    author = fields.ForeignKeyField("models.Users", related_name="todo")
     created_at = fields.DatetimeField(auto_now_add=True)
     modified_at = fields.DatetimeField(auto_now=True)
     complete = fields.BooleanField()
