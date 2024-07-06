@@ -2,6 +2,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database.register import register_tortoise  # NEW
 from database.config import TORTOISE_ORM 
+from tortoise import Tortoise
+
+Tortoise.init_models(['database.models'], 'models')
 
 app = FastAPI()
 
