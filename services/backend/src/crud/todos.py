@@ -10,6 +10,7 @@ sys.path.insert(0, current_dir[:current_dir.rfind(path.sep)])
 
 from database.models import Todos
 from schemas.todos import TodoOutSchema
+from schemas.tokens import Status
 
 
 async def get_Todos():
@@ -40,7 +41,7 @@ async def update_todo(todo_id, todo, current_user) -> TodoOutSchema:
     raise HTTPException(status_code=403, detail=f"Not authorized to update")
 
 
-async def delete_note(todo_id, current_user):
+async def delete_todo(todo_id, current_user) -> Status:
     try:
         db_todo = await TodoOutSchema.from_queryset_single(Todos.get(id=todo_id))
     except DoesNotExist:
@@ -50,6 +51,6 @@ async def delete_note(todo_id, current_user):
         deleted_count = await Todos.filter(id=todo_id).delete()
         if not deleted_count:
             raise HTTPException(status_code=404, detail=f"Todo {todo_id} does not exist")
-        return f"Deleted note {todo_id}"
+        return Status(message=f"Deleted todo {todo_id}")
 
     raise HTTPException(status_code=403, detail=f"Not authorized to delete")
