@@ -2,6 +2,6 @@
 services/backend/src/__pycache__/
 .env
 **/__pycache__/
-**/local_db/
+**/psql_db/
 services/backend/src/database/logfile
 **/venv/
