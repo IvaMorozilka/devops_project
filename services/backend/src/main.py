@@ -3,8 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from database.register import register_tortoise  # NEW
 from database.config import TORTOISE_ORM 
 from tortoise import Tortoise
+import uvicorn
 
 Tortoise.init_models(['database.models'], 'models')
+
+from routes import users, todos
 
 app = FastAPI()
 
@@ -16,10 +19,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(users.router)
+app.include_router(todos.router)
 
-register_tortoise(app, config=TORTOISE_ORM, generate_schemas=False)
+register_tortoise(app, config=TORTOISE_ORM, generate_schemas=True)
 
-@app.get("/")
-def home():
-    return "Hello, World!"
-
+if __name__ == "__main__":
+    uvicorn.run(app)
