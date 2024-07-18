@@ -15,4 +15,4 @@ class Todos(models.Model):
     author = fields.ForeignKeyField("models.Users", related_name="todo")
     created_at = fields.DatetimeField(auto_now_add=True)
     modified_at = fields.DatetimeField(auto_now=True)
-    complete = fields.BooleanField()
+    complete = fields.BooleanField(default=False)
