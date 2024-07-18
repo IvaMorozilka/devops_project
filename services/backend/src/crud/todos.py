@@ -13,8 +13,8 @@ from schemas.todos import TodoOutSchema
 from schemas.tokens import Status
 
 
-async def get_todos():
-    return await TodoOutSchema.from_queryset(Todos.all())
+async def get_todos(user_id):
+    return await TodoOutSchema.from_queryset(Todos.filter(author=user_id.id))
 
 
 async def get_todo(todo_id) -> TodoOutSchema:

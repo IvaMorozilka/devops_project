@@ -26,8 +26,8 @@ router = APIRouter()
     response_model=List[TodoOutSchema],
     dependencies=[Depends(get_current_user)],
 )
-async def get_todos():
-    return await crud.get_todos()
+async def get_todos(current_user: UserOutSchema = Depends(get_current_user)):
+    return await crud.get_todos(user_id=current_user)
 
 
 @router.get(
@@ -37,7 +37,7 @@ async def get_todos():
 )
 async def get_todo(todo_id: int) -> TodoOutSchema:
     try:
-        return await crud.get_todo(note_id)
+        return await crud.get_todo(todo_id)
     except DoesNotExist:
         raise HTTPException(
             status_code=404,
